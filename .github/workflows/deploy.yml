@@ -1,0 +1,38 @@
+name: Deploy Service
+
+on:
+  workflow_dispatch:
+    inputs:
+      service:
+        description: Service to deploy
+        type: string
+        required: true
+
+jobs:
+  deploy-dev:
+    name: Development
+    runs-on: ubuntu-latest
+    environment:
+      name: ${{ inputs.service }}-dev
+      url: https://console.cloud.google.com/welcome?project=${{ inputs.service }}-dev
+    steps:
+      - name: Deploy ${{ inputs.service }}
+        run: echo Deploying ${{ inputs.service }}
+  deploy-stg:
+    name: Staging
+    runs-on: ubuntu-latest
+    environment:
+      name: ${{ inputs.service }}-stg
+      url: https://console.cloud.google.com/welcome?project=${{ inputs.service }}-stg
+    steps:
+      - name: Deploy ${{ inputs.service }}
+        run: echo Deploying ${{ inputs.service }}
+  deploy-prd:
+    name: Production
+    runs-on: ubuntu-latest
+    environment:
+      name: ${{ inputs.service }}-prd
+      url: https://console.cloud.google.com/welcome?project=${{ inputs.service }}-prd
+    steps:
+      - name: Deploy ${{ inputs.service }}
+        run: echo Deploying ${{ inputs.service }}
